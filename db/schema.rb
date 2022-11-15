@@ -42,15 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_081856) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "articles", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_articles_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -66,7 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_15_081856) do
 
   create_table "wallets", force: :cascade do |t|
     t.integer "balance_cents", default: 0, null: false
-    t.string "balance_currency", default: "USD", null: false
+    t.string "balance_currency", default: "IDR", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
