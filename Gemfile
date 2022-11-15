@@ -11,6 +11,7 @@ gem "cancancan", "~> 3.4"
 gem "ransack", "~> 3.2"
 gem "pagy", "~> 5.10"
 gem "faker", "~> 2"
+gem "money-rails", "~> 1.15"
 
 # Front-end
 gem "sprockets-rails", "~> 3.4"
