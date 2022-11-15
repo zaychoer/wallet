@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :validatable
 
   has_one_attached :avatar
+  has_one :wallet
 
   def name
     @name ||= self[:name].presence || email.split("@").first
