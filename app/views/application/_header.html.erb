@@ -8,7 +8,10 @@
         <div class="hidden sm:block">
           <div class="ml-8 flex items-baseline space-x-4">
             <a href="<%= root_path %>" class="<%= nav_link_class("home") %>">Home</a>
-            <a href="<%= users_path %>" class="<%= nav_link_class("users") %>">Users</a>
+            <% if user_signed_in? %>
+              <a href="<%= users_path %>" class="<%= nav_link_class("users") %>">Users</a>
+              <a href="<%= transactions_path %>" class="<%= nav_link_class("transactions") %>">Transactions</a>
+            <% end %>
           </div>
         </div>
       </div>
@@ -36,7 +39,10 @@
   <div class="sm:hidden hidden mobile-menu">
     <div class="space-y-2 px-2 pb-3 sm:px-3">
       <a href="<%= root_path %>" class="<%= nav_link_class("home", "block") %>">Home</a>
-      <a href="<%= users_path %>" class="<%= nav_link_class("users", "block") %>">Users</a>
+
+      <% if user_signed_in? %>
+        <a href="<%= users_path %>" class="<%= nav_link_class("users", "block") %>">Users</a>
+      <% end %>
       <% unless user_signed_in? %>
         <a href="<%= new_user_session_path %>" class="<%= nav_link_class(nil, "block") %>">Sign in</a>
       <% end %>
