@@ -1,0 +1,24 @@
+<h1>Create Transaction</h1>
+
+<%= form_with url: "/transactions" do |form| %>
+  <%= form.hidden_field :from, value: @from %>
+  <div>
+    <%= form.label :amount %>
+    <%= form.number_field :amount %>
+  </div>
+
+  <div>
+    <%= form.label :to %>
+    <%= form.select :to, @wallets.map {|w| [w.wallet_id, w.id ]}, {:include_blank => "Transfer To"}, class: "block w-full max-w-lg mt-2 mb-4 rounded" %>
+  </div>
+
+  <div>
+    <%= form.label :transaction_type %>
+    <%= form.select :transaction_type, @transaction_types, {:include_blank => "Transaction Type"}, class: "block w-full max-w-lg mt-2 mb-4 rounded" %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit nil, class: 'btn' %>
+  </div>
+
+<% end %>

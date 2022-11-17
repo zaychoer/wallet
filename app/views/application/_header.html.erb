@@ -9,8 +9,8 @@
           <div class="ml-8 flex items-baseline space-x-4">
             <a href="<%= root_path %>" class="<%= nav_link_class("home") %>">Home</a>
             <% if user_signed_in? %>
-              <a href="<%= users_path %>" class="<%= nav_link_class("users") %>">Users</a>
               <a href="<%= transactions_path %>" class="<%= nav_link_class("transactions") %>">Transactions</a>
+              <a href="<%= users_path %>" class="<%= nav_link_class("users") %>">Users</a>
             <% end %>
           </div>
         </div>
@@ -41,6 +41,7 @@
       <a href="<%= root_path %>" class="<%= nav_link_class("home", "block") %>">Home</a>
 
       <% if user_signed_in? %>
+        <a href="<%= transactions_path %>" class="<%= nav_link_class("transactions", "block") %>">Transactions</a>
         <a href="<%= users_path %>" class="<%= nav_link_class("users", "block") %>">Users</a>
       <% end %>
       <% unless user_signed_in? %>

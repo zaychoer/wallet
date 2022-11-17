@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  after_create :create_wallet
+
   devise :database_authenticatable,
          :registerable,
          :recoverable,
@@ -7,8 +9,6 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   has_one :wallet
-
-  after_create :create_wallet
 
   def name
     @name ||= self[:name].presence || email.split("@").first
