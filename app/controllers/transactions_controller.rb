@@ -2,8 +2,9 @@ class TransactionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    wallet_id = current_user.wallet.id
     @q = Transaction.ransack(params[:q])
-    @pagy, @transactions = pagy(@q.result.order(created_at: :desc), items: 5)
+    @pagy, @transactions = pagy(@q.result.order(created_at: :desc).where(from_id: wallet_id), items: 5)
   end
 
   def new
@@ -15,10 +16,10 @@ class TransactionsController < ApplicationController
   def create
     begin
       ActiveRecord::Base.transaction do
-        amount = params[:amount].to_i
+        amount = params[:amount].to_f
         transaction_type = params[:transaction_type]
-        wallet_source_balance = wallet_source.balance_cents
-        wallet_target_balance = wallet_target.balance_cents
+        wallet_source_balance = wallet_source.balance.to_f
+        wallet_target_balance = wallet_target.balance.to_f
 
         if transaction_type == 'transfer'
           wallet_source.update!(balance: wallet_source_balance - amount)

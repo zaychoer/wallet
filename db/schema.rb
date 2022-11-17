@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_17_063811) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_17_130256) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_17_063811) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "amount_cents", default: 0, null: false
+    t.decimal "amount_cents", precision: 15, scale: 2, default: "0.0", null: false
     t.string "amount_currency", default: "IDR", null: false
     t.integer "from_id", null: false
     t.integer "to_id", null: false
@@ -67,7 +67,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_17_063811) do
   end
 
   create_table "wallets", force: :cascade do |t|
-    t.integer "balance_cents", default: 0, null: false
+    t.decimal "balance_cents", precision: 15, scale: 2, default: "0.0", null: false
     t.string "balance_currency", default: "IDR", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false

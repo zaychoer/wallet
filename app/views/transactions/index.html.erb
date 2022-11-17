@@ -1,6 +1,7 @@
 <div>
   <h1>Transactions</h1>
-  <p class=><%= link_to "Add New", new_transaction_path %></p>
+  <p><%= link_to "Add New", new_transaction_path %></p>
+  <p>Current Balance : <%= current_user.wallet.balance.format %></p>
 </div>
 
 <div class="table-responsive mt-8">
