@@ -6,19 +6,20 @@ class Transaction < ApplicationRecord
   validates :transaction_number, presence: true, uniqueness: true
   validates :transaction_type, presence: true
 
-  before_validation :load_defaults
+  before_validation :generate_transaction_number
 
   enum transaction_type: {
     debit: 'debit',
     credit: 'credit',
-    withdraw: 'withdraw'
+    withdraw: 'withdraw',
     deposit: 'deposit'
   }
 
   private
-    def load_defaults
-      if self.new_record?
-        self.transaction_number = SecureRandom.uuid
-      end
+
+  def generate_transaction_number
+    if self.new_record?
+      self.transaction_number = SecureRandom.uuid
     end
+  end
 end

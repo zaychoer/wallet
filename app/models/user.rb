@@ -8,13 +8,18 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_one :wallet
 
+  after_create :create_wallet
+
   def name
     @name ||= self[:name].presence || email.split("@").first
   end
 
-  protected
-
-  def password_required?
-    new_record? || password.present?
+  def create_wallet
+    wallet_id = self.email.split("@").first
+    Wallet.create!(
+      balance: 0,
+      user: self,
+      wallet_id: wallet_id
+    )
   end
 end
